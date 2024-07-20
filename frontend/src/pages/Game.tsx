@@ -56,7 +56,7 @@ export function Game() {
 
       toast(
         <div>
-          <p>Your result amount is 0. Do you want to continue?</p>
+          <p>Your result amount is 1. Do you want to continue?</p>
           <button onClick={handleConfirm} className="mr-2 px-3 py-1 bg-green-500 text-white rounded">
             Yes
           </button>
@@ -75,7 +75,7 @@ export function Game() {
   const addBallHandler = async () => {    
     if(result < 1){
       console.log(result)
-      const userConfirmed = await confirmContinue();
+      await confirmContinue();
       
       return;
     }
