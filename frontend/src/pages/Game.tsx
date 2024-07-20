@@ -3,10 +3,10 @@ import { BallManager } from "../game/classes/BallManager";
 import axios from "axios";
 import { Button } from "../components/ui";
 import { baseURL } from "../utils";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast ,Bounce } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 const multipliers = [
-  16, 9, 2, 1.4,1.4, 1.2, 1.1, 1, 0.5, 1, 1.1, 1.2, 1.4, 1.4, 2, 9, 16
+  16, 9, 2, 1.4, 1.4, 1.2, 1.1, 1, 0.5, 1, 1.1, 1.2, 1.4, 1.4, 2, 9, 16
 ];
 
 export function Game() {
@@ -33,9 +33,9 @@ export function Game() {
     const currentMultiplier = multipliers[boxNumber] || 1;
     setMultiplier(currentMultiplier);
     console.log(boxNumber)
-    if(inputRef.current != null && inputRef.current?.value != null) {
+    if (inputRef.current != null && inputRef.current?.value != null) {
       console.log(result, currentMultiplier, Number(inputRef.current?.value))
-      setResult((prevResult) =>  currentMultiplier * prevResult);
+      setResult((prevResult) => currentMultiplier * prevResult);
     }
   }
   const confirmContinue = () => {
@@ -55,6 +55,7 @@ export function Game() {
       };
 
       toast(
+        
         <div>
           <p>Your result amount is 1. Do you want to continue?</p>
           <button onClick={handleConfirm} className="mr-2 px-3 py-1 bg-green-500 text-white rounded">
@@ -65,18 +66,24 @@ export function Game() {
           </button>
         </div>,
         {
-          autoClose: false,
-          closeOnClick: false,
-          draggable: false,
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
         }
       );
     });
   };
-  const addBallHandler = async () => {    
-    if(result < 1){
+  const addBallHandler = async () => {
+    if (result < 1) {
       console.log(result)
       await confirmContinue();
-      
+
       return;
     }
     try {
@@ -101,12 +108,35 @@ export function Game() {
       }
     } catch (error) {
       console.error("Error adding ball:", error);
+      toast('🦄 Wow so easy!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
 
   return (
     <div className="relative flex flex-col lg:flex-row items-center justify-center">
-      <ToastContainer />
+     <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <canvas ref={canvasRef} width="800" height="800"></canvas>
       <div className="flex flex-col items-center">
         <input
