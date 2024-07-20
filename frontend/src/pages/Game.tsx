@@ -13,7 +13,7 @@ export function Game() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [ballManager, setBallManager] = useState<BallManager>();
   const [multiplier, setMultiplier] = useState<number | null>(null); // State for the multiplier (box number)
-  const [betAmount, setBetAmount] = useState<number>(0); // State for the bet amount
+  const [betAmount, setBetAmount] = useState<number>(); // State for the bet amount
   const [result, setResult] = useState<number>(0); // State for the result
   const canvasRef = useRef<any>();
 
@@ -111,7 +111,7 @@ export function Game() {
       <div className="flex flex-col items-center">
         <input
           ref={inputRef}
-          type="number"
+          type="text"
           value={betAmount}
           onChange={(e) => {
             setBetAmount(Number(e.target.value));
