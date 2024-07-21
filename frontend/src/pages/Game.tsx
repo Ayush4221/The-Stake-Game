@@ -149,9 +149,9 @@ export function Game() {
           </div>
         )}
       </div>
-      <div className="absolute top-4 right-4 p-2 bg-blue-500 text-white rounded-lg shadow-lg">
+      {/* <div className="absolute top-4 right-4 p-2 bg-blue-500 text-white rounded-lg shadow-lg">
         Multiplier (Box): {multiplier !== null ? multiplier.toFixed(2) : 'N/A'}
-      </div>
+      </div> */}
     </div>
   );
 }
